@@ -7,18 +7,21 @@
   },
   "browser_action": {
     "default_title": "OAuth 2.0",
-    "default_icon": "icon128.png",
+    "default_icon":  "icon128.png",
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["http://doorkeeper-provider.herokuapp.com/robots.txt*"],
-      "js": ["oauth2/oauth2_inject.js"],
-        "run_at": "document_start"
+      "matches": ["https://doorkeeper-provider.herokuapp.com/robots.txt*"],
+      "js":      ["oauth2/oauth2_inject.js"],
+      "run_at":  "document_start"
     }
   ],
   "permissions": [
-    "http://doorkeeper-provider.herokuapp.com/api/v1/*"
+    "https://doorkeeper-provider.herokuapp.com/api/v1/*"
   ],
-	"manifest_version": 2
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ]
 }

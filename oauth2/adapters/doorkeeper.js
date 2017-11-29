@@ -1,10 +1,13 @@
+var API_HOST = 'https://doorkeeper-provider.herokuapp.com';
+
 OAuth2.adapter('doorkeeper', {
   /**
    * @return {URL} URL to the page that returns the authorization code
    */
   authorizationCodeURL: function(config) {
-    return 'http://doorkeeper-provider.herokuapp.com/oauth/authorize?\
-response_type=code&client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}&scope={{API_SCOPE}}'
+    var url = API_HOST + '/oauth/authorize?response_type=code&client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}&scope={{API_SCOPE}}'
+    console.log(config)
+    return url
         .replace('{{CLIENT_ID}}', config.clientId)
         .replace('{{REDIRECT_URI}}', this.redirectURL(config))
         .replace('{{API_SCOPE}}', config.apiScope);
@@ -15,7 +18,7 @@ response_type=code&client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}&scope={
    * script into
    */
   redirectURL: function(config) {
-    return 'http://doorkeeper-provider.herokuapp.com/robots.txt';
+    return API_HOST + '/robots.txt';
   },
 
   /**
@@ -33,7 +36,7 @@ response_type=code&client_id={{CLIENT_ID}}&redirect_uri={{REDIRECT_URI}}&scope={
    * @return {URL} URL to the access token providing endpoint
    */
   accessTokenURL: function() {
-    return 'http://doorkeeper-provider.herokuapp.com/oauth/token';
+    return API_HOST + '/oauth/token';
   },
 
   /**

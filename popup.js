@@ -15,21 +15,21 @@
  */
 
 var doorkeeper = new OAuth2('doorkeeper', {
-  client_id: '9ce470b894e2c5ac9e4f7b824e104f0bf4b1fbb69d24ba5920e6597fc8736f4c',
-  client_secret: '0ffcf039cf5fe3aadc84c4d901d9e715b21be5f15d4bccebc4f408c9cf045a2e',
+  client_id: '376ae013d72d20fd56f7ee05dc5927977024657d2183766afb7458f01f4610ea',
+  client_secret: 'a692cd34db00f31feb0bfabc284298cd149b6f35f415a19f051d48d602552bb6',
   api_scope: 'public'
 });
 
+var API_HOST = 'https://doorkeeper-provider.herokuapp.com';
+var API_URL = API_HOST + "/api/v1";
+
 doorkeeper.authorize(function() {
-
-	var API_URL = "http://doorkeeper-provider.herokuapp.com/api/v1/";
-
   if(doorkeeper.getAccessToken())
     $('#display-token').text(doorkeeper.getAccessToken());
-	
-	$('.btn').click(function() {
-		callApi($(this).attr('id'));
-	});
+
+  $('.btn').click(function() {
+    callApi($(this).attr('id'));
+  });
 
   function callApi(action) {
     // Make an XHR that creates the task
@@ -51,6 +51,4 @@ doorkeeper.authorize(function() {
     xhr.setRequestHeader('Authorization', 'Bearer ' + doorkeeper.getAccessToken());
     xhr.send();
   }
-
 });
-
